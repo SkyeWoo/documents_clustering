@@ -3,11 +3,11 @@ from tfidf import tfidf_matrix, terms
 from sklearn.externals import joblib
 
 # TODO: 调高
-num_clusters = 5
+num_clusters = 6
 km = KMeans(n_clusters=num_clusters)
 km.fit(tfidf_matrix)
-# joblib.dump(km, 'doc_cluster.pkl')
-km = joblib.load('doc_cluster.pkl')
+# joblib.dump(km, 'doc_cluster_6.pkl')
+km = joblib.load('doc_cluster_6.pkl')
 clusters = km.labels_.tolist()
 
 # Here is some fancy indexing and sorting on each cluster to identify which are the top n (I chose n=6) words that are
@@ -30,7 +30,7 @@ for i in range(num_clusters):
         print(' %s' % vocab_frame.loc[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
     print()
 
-    print("Cluster %d titles:" % i, end='')
-    for title in frame.loc[i]['titles'].values.tolist():
-        print(' %s,' % title, end='')
+    print("Cluster %d keywords:" % i, end='')
+    for keyword in frame.loc[i]['keywords'].values.tolist():
+        print(' %s,' % keyword, end='')
     print()
