@@ -28,8 +28,9 @@ for i in range(num_clusters):
         # print(' %s' % frame.loc[i]['keywords'].values.tolist)
         print(' %s' % vocab_frame.loc[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
     print()
-
+'''
     print("Cluster %d keywords:" % i, end='')
     for keyword in frame.loc[i]['keywords'].values.tolist():
         print(' %s,' % keyword, end='')
     print()
+'''
