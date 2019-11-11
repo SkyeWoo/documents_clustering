@@ -49,6 +49,5 @@ for i in range(len(df)):
     ax.text(df.ix[i]['x'], df.ix[i]['y'], df.ix[i]['title'], size=8)
 
 plt.show()  # show the plot
-
 # uncomment the below to save the plot if need be
 # plt.savefig('clusters_small_noaxes.png', dpi=200)
