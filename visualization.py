@@ -1,6 +1,6 @@
 import os  # for os.path.basename
 from tfidf import tfidf_matrix
-from kmeans import clusters, keywords
+from kmeans import clusters, labels
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.manifold import MDS
 import matplotlib.pyplot as plt
@@ -19,8 +19,8 @@ xs, ys = pos[:, 0], pos[:, 1]
 cluster_colors = {0: '#1b9e77', 1: '#d95f02', 2: '#7570b3', 3: '#e7298a', 4: '#66a61e', 5: '#fffa75'}
 
 # create data frame that has the result of the MDS plus the cluster numbers and titles
-kws = [i.split('\n')[0] for i in keywords]
-df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, title=kws))
+# kws = [i.split('\n')[0] for i in keywords]
+df = pd.DataFrame(dict(x=xs, y=ys, label=clusters, title=labels))
 
 # group by cluster
 groups = df.groupby('label')

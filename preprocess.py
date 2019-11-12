@@ -7,16 +7,16 @@ papers = df['title'] + " " + df['keywords'] + " " + df['abstract']
 groups = df['groups'].apply(str)
 pattern = re.compile(r'[(](.*?)[)]', re.S)
 labels = [re.findall(pattern, w) for w in groups]
-# print(labels)
-titles = df['title'].values.tolist()
-keywords = df['keywords'].values.tolist()
-abstracts = df['abstract'].values.tolist()
+dic = {}
+for k1 in labels:
+    for k in k1:
+        dic[k] = dic.get(k, 0) + 1
+# print(dic)
 
 import nltk
 from nltk import pos_tag
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
-# load nltk's English stopwords as variable called 'stopwords'
 stopwords = nltk.corpus.stopwords.words('english')
 # print(stopwords[:10])
 stopwords.extend(['use', 'using', 'used', 'proposed', 'propose', 'proposing', 'results', 'resulting', 'result',
