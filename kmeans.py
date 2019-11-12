@@ -6,7 +6,7 @@ from sklearn.externals import joblib
 num_clusters = 5
 km = KMeans(n_clusters=num_clusters)
 km.fit(tfidf_matrix)
-joblib.dump(km, 'doc_cluster.pkl')
+joblib.dump(km, 'doc_cluster.pkl')  # TODO
 # km = joblib.load('doc_cluster.pkl')
 clusters = km.labels_.tolist()
 
@@ -17,7 +17,6 @@ import pandas as pd
 papers = {'titles': titles, 'keywords': keywords, 'abstracts': abstracts, 'cluster': clusters}
 frame = pd.DataFrame(papers, index=[clusters], columns=['titles', 'keywords', 'cluster'])
 # print(frame['cluster'].value_counts())
-
 print("Top terms per cluster:")
 # sort cluster centers by proximity to centroid
 order_centroids = km.cluster_centers_.argsort()[:, ::-1]

@@ -14,8 +14,11 @@ from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 # load nltk's English stopwords as variable called 'stopwords'
 stopwords = nltk.corpus.stopwords.words('english')
+# print(stopwords[:10])
+stopwords.extend(['use', 'using', 'used', 'proposed', 'propose', 'proposing', 'results', 'resulting', 'result',
+                  'method', 'paper', 'models', 'model', 'methods', 'algorithm', 'approach', 'approaches'])
 
-# 获取单词的词性
+# get the property of words
 def get_wordnet_pos(tag):
     if tag.startswith('J'):
         return wordnet.ADJ
@@ -29,6 +32,7 @@ def get_wordnet_pos(tag):
         return None
 
 
+# use lemmatizing/tokenizing functions to iterate over the list of papers
 totalvocab_tokenized = []
 def tokenize_and_lemmatize(text):
     tokens = [word for sent in nltk.sent_tokenize(text) for word in nltk.word_tokenize(sent)]
@@ -47,16 +51,11 @@ def tokenize_and_lemmatize(text):
 
 
 totalvocab_lemmatized = []
-# use stemming/tokenizing and tokenizing functions to iterate over the list of synopses
-# to create two vocabularies: one stemmed and one only tokenized.
-# use extend so it's a big flat list of vocab
 for i in papers:
     allwords_lemmatized = tokenize_and_lemmatize(i)
     totalvocab_lemmatized.extend(allwords_lemmatized)
 
-# create a pandas DataFrame with the stemmed vocabulary as the index and the tokenized words as the column.
-# The benefit of this is it provides an efficient way to look up a stem and return a full token.
-# The downside here is that stems to tokens are one to many:
-# the stem 'run' could be associated with 'ran', 'runs', 'running', etc.
+# create a pandas DataFrame with the lemmatized vocabulary as the index and the tokenized words as the column.
+# the lemmatization 'run' could be associated with 'ran', 'runs', 'running', etc.
 vocab_frame = pd.DataFrame({'words': totalvocab_tokenized}, index=totalvocab_lemmatized)
 # print(vocab_frame.head())

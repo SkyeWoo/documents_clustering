@@ -1,11 +1,21 @@
 import os  # for os.path.basename
-from tfidf import xs, ys
+from tfidf import tfidf_matrix
 from kmeans import clusters, keywords
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.manifold import MDS
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# dist is defined as 1 - the cosine similarity of each document. This calculation is for plotting.
+dist = 1 - cosine_similarity(tfidf_matrix)
+MDS()
+# convert two components as we're plotting points in a two-dimensional plane
+# "precomputed" because we provide a distance matrix
+mds = MDS(n_components=2, dissimilarity="precomputed", random_state=1)
+pos = mds.fit_transform(dist)  # shape (n_components, n_samples)
+xs, ys = pos[:, 0], pos[:, 1]
+
 # TODO: 增加颜色以及修改名称
-#set up colors per clusters using a dict
 cluster_colors = {0: '#1b9e77', 1: '#d95f02', 2: '#7570b3', 3: '#e7298a', 4: '#66a61e', 5: '#fffa75'}
 
 # create data frame that has the result of the MDS plus the cluster numbers and titles
@@ -44,5 +54,4 @@ for i in range(len(df)):
     ax.text(df.ix[i]['x'], df.ix[i]['y'], df.ix[i]['title'], size=8)
 
 plt.show()  # show the plot
-# uncomment the below to save the plot if need be
-# plt.savefig('clusters_small_noaxes.png', dpi=200)
+# plt.savefig('kmeans.png', dpi=200)
