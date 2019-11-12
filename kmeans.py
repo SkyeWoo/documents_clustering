@@ -3,13 +3,12 @@ from tfidf import tfidf_matrix, terms
 from sklearn.externals import joblib
 
 # TODO: 调高
-num_clusters = 5
+num_clusters = 22
 km = KMeans(n_clusters=num_clusters)
 km.fit(tfidf_matrix)
-joblib.dump(km, 'doc_cluster.pkl')  # TODO
-# km = joblib.load('doc_cluster.pkl')
+# joblib.dump(km, 'doc_cluster_22.pkl')  # TODO
+km = joblib.load('doc_cluster_22.pkl')
 clusters = km.labels_.tolist()
-
 
 # Here is some fancy indexing and sorting on each cluster to identify which are the top n (I chose n=6) words that are
 # nearest to the cluster centroid. This gives a good sense of the main topic of the cluster.
@@ -27,7 +26,6 @@ for i in range(num_clusters):
     print("Cluster %d words:" % i, end='')
 
     for ind in order_centroids[i, :6]:  # TODO: replace 6 with n words per cluster
-        # print(' %s' % frame.loc[i]['keywords'].values.tolist)
         print(' %s' % vocab_frame.loc[terms[ind].split(' ')].values.tolist()[0][0].encode('utf-8', 'ignore'), end=',')
     print()
 
