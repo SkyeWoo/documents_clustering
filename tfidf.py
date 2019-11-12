@@ -6,7 +6,7 @@ from preprocess import tokenize_and_lemmatize, papers
 # TODO: 调高max_df, 调低min_df, 根据title看ngram_range的上限应该是几个词语组成词组
 tfidf_vectorizer = TfidfVectorizer(max_df=0.8, max_features=200000,
                                  min_df=0.2, stop_words='english',
-                                 use_idf=True, tokenizer=tokenize_and_lemmatize, ngram_range=(1, 6))
+                                 use_idf=True, tokenizer=tokenize_and_lemmatize, ngram_range=(1, 5))
 # Fraudulent Support Telephone Number Identification Based on Co-occurrence Information on the Web
 # The Complexity of Reasoning with FODD and GFODD(Generalized First Order Decision Diagrams)
 # ReLISH: Reliable Label Inference via Smoothness Hypothesis

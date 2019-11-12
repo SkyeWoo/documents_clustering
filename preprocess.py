@@ -1,14 +1,18 @@
 import pandas as pd
+import re
 filename = 'AAAI-14 Accepted Papers.csv'
 file = open(filename, 'rb')
 df = pd.read_csv(file, encoding='latin1', sep=',')
 papers = df['title'] + " " + df['keywords'] + " " + df['abstract']
+groups = df['groups'].apply(str)
+pattern = re.compile(r'[(](.*?)[)]', re.S)
+labels = [re.findall(pattern, w) for w in groups]
+# print(labels)
 titles = df['title'].values.tolist()
 keywords = df['keywords'].values.tolist()
 abstracts = df['abstract'].values.tolist()
 
 import nltk
-import re
 from nltk import pos_tag
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
