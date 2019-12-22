@@ -16,7 +16,11 @@ pos = mds.fit_transform(dist)  # shape (n_components, n_samples)
 xs, ys = pos[:, 0], pos[:, 1]
 
 # TODO: 增加颜色以及修改名称
-cluster_colors = {0: '#1b9e77', 1: '#d95f02', 2: '#7570b3', 3: '#e7298a', 4: '#66a61e', 5: '#fffa75'}
+num=22
+cluster_colors = {0: '#1b9e77', 1: '#d95f02', 2: '#7570b3', 3: '#e7298a', 4: '#66a61e', 5: '#fffa75',
+                  6: '#FF1493', 7: '#0000FF', 8: '#1E90FF', 9: '#EEE8AA', 10: '#FFA500', 11: '#808080',
+                  12: '#00FF00', 13: '#FF0000', 14: '#40E0D0', 15: '#20B2AA', 16: '#2F4F4F', 17: '#00BFFF',
+                  18: '#4682B4', 19: '#B22222', 20: '#BC8F8F', 21: '#FF6347'}
 
 # create data frame that has the result of the MDS plus the cluster numbers and titles
 # kws = [i.split('\n')[0] for i in keywords]

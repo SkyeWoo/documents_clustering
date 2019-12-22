@@ -12,6 +12,7 @@ for k1 in labels:
     for k in k1:
         dic[k] = dic.get(k, 0) + 1
 # print(dic)
+# print(len(dic)) # 22
 
 import nltk
 from nltk import pos_tag
